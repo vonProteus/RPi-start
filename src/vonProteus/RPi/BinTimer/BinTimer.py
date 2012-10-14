@@ -21,7 +21,7 @@ class BinTimer(object):
         Constructor
         '''
         print "init start"
-        self.leds = {'gpio': array('i',[5,7,8,10,11,12]),'led': array('i',[0,0,0,0,0,0]), 'now': 0, 'val': 0, 'statLed':21}
+        self.leds = {'gpio': array('i',[5,7,10,8,11,12]),'led': array('i',[0,0,0,0,0,0]), 'now': 0, 'val': 0, 'statLed':21}
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.leds['statLed'], GPIO.OUT)
         GPIO.output(self.leds['statLed'],1)
@@ -121,6 +121,7 @@ class BinTimer(object):
             time.sleep(0.3)
             GPIO.output(self.leds['statLed'], mig)
             for a in range(5,-1,-1):
+                time.sleep(0.5)
                 GPIO.output(self.leds['gpio'][a],mig)
             if mig == 1 :
                 mig = 0;
