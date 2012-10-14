@@ -7,6 +7,9 @@ Created on Oct 14, 2012
 import termios, sys, os
 TERMIOS = termios
 from vonProteus.RPi.BinTimer.BinTimer import BinTimer
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BOARD)
 
 def getkey():
     fd = sys.stdin.fileno()
