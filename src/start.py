@@ -8,8 +8,22 @@ import termios, sys, os
 TERMIOS = termios
 from vonProteus.RPi.BinTimer.BinTimer import BinTimer
 import RPi.GPIO as GPIO
+import time
+
 
 GPIO.setmode(GPIO.BOARD)
+LBut = 26;
+RBut = 23;
+TBut = 24;
+GoBut = 21;
+
+
+
+
+GPIO.setup(LBut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(RBut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(TBut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(GoBut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def getkey():
     fd = sys.stdin.fileno()
@@ -42,17 +56,38 @@ tmp = BinTimer();
 while True :
     tmp.updateDisplay();
     
-    x = getkey();
-    if x == 'a' : 
-        tmp.moveL()
-    if x ==  'd' : 
-        tmp.moveR()
-    if x ==  'w' : 
-        tmp.click()
-    if x == 's' : 
-        tmp.click()
-   
-    if x == 'g' :
-        tmp.go()
+    while True:
+        time.sleep(0.1)
+#        x = getkey();
         
+#        if x == 'a' : 
+#            tmp.moveL()
+#            break
+#        if x ==  'd' : 
+#            tmp.moveR()
+#            break
+#        if x ==  'w' : 
+#            tmp.click()
+#            break
+#        if x == 's' : 
+#            tmp.click()
+#            break
+#       
+#        if x == 'g' :
+#            tmp.go()
+#            break
+
+        if GPIO.input(LBut) : 
+            tmp.moveL()
+            break
+        if GPIO.input(RBut) : 
+            tmp.moveR()
+            break
+        if GPIO.input(TBut) : 
+            tmp.click()
+            break
+
+        if GPIO.input(GoBut):
+            tmp.go()
+            break
     
