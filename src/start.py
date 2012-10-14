@@ -55,6 +55,7 @@ tmp = BinTimer();
 
 while True :
     tmp.updateDisplay();
+    tmp.migNow()
     
     while True:
         time.sleep(0.2)
