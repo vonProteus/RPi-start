@@ -108,7 +108,7 @@ class BinTimer(object):
         print "lampka off"
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.leds['statLed'], GPIO.OUT)
-        GPIO.output(self.leds['statLed'],1)
+        GPIO.output(self.leds['statLed'],0)
         
     def goStop(self):
         print "lampka on + miganie czy cus"
