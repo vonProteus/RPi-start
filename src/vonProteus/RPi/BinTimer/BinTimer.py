@@ -5,7 +5,7 @@ Created on Oct 14, 2012
 '''
 from array import array
 import time
-
+import RPi.GPIO as GPIO
 
 
 
@@ -21,8 +21,10 @@ class BinTimer(object):
         Constructor
         '''
         print "init start"
-        self.leds = {'gpio': array('i',[0,1,2,3,4,5]),'led': array('i',[0,0,0,0,0,0]), 'now': 0, 'val': 0}
-        
+        self.leds = {'gpio': array('i',[5,7,8,10,11,12]),'led': array('i',[0,0,0,0,0,0]), 'now': 0, 'val': 0, 'statLed':21}
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.leds['statLed'], GPIO.OUT)
+        GPIO.output(self.leds['statLed'],1)
      
     def setup(self):
         print "setup"
@@ -41,6 +43,8 @@ class BinTimer(object):
         
     def updateDisplay(self):
         print "update Display"
+        GPIO.setmode(GPIO.BOARD)
+        
         line0 = "";
         line1 = "";
         line2 = "";
@@ -52,6 +56,8 @@ class BinTimer(object):
                 
             line1 += " " + str(self.leds['gpio'][a])
             line2 += " " + str(self.leds['led'][a])
+            GPIO.setup(self.leds['gpio'][a], GPIO.OUT)
+            GPIO.output(self.leds['gpio'][a],self.leds['led'][a])
         print line0;
         print line1;
         print line2;
@@ -100,8 +106,27 @@ class BinTimer(object):
             
     def goStart(self):
         print "lampka off"
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.leds['statLed'], GPIO.OUT)
+        GPIO.output(self.leds['statLed'],1)
         
     def goStop(self):
         print "lampka on + miganie czy cus"
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.leds['statLed'], GPIO.OUT)
+        for a in range(5,-1,-1):
+            GPIO.setup(self.leds['gpio'][a], GPIO.OUT)
+        mig = 1
+        for a in range(0,3) :
+            time.sleep(0.3)
+            GPIO.output(self.leds['statLed'], mig)
+            for a in range(5,-1,-1):
+                GPIO.output(self.leds['gpio'][a],mig)
+            if mig == 1 :
+                mig = 0;
+            else:
+                mig = 1;
+        
+        GPIO.cleanup()
         exit(0)
         
