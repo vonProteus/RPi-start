@@ -79,15 +79,19 @@ while True :
 
         if GPIO.input(LBut) == BUTTONDOWN : 
             tmp.moveL()
+            tmp.migNow()
             break
         if GPIO.input(RBut) == BUTTONDOWN: 
             tmp.moveR()
+            tmp.migNow()
             break
         if GPIO.input(TBut) == BUTTONDOWN: 
             tmp.click()
+            time.sleep(0.5)
             break
 
         if GPIO.input(GoBut) == BUTTONDOWN:
             tmp.go()
+            time.sleep(0.5)
             break
     

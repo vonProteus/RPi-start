@@ -131,3 +131,15 @@ class BinTimer(object):
         GPIO.cleanup()
         exit(0)
         
+    def migNow(self):
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.leds['gpio'][self.leds['now']], GPIO.OUT)
+        GPIO.output(self.leds['gpio'][self.leds['now']],0)
+        time.sleep(0.2)
+        GPIO.output(self.leds['gpio'][self.leds['now']],1)
+        time.sleep(0.2)
+        GPIO.output(self.leds['gpio'][self.leds['now']],0)
+        time.sleep(0.2)
+        GPIO.output(self.leds['gpio'][self.leds['now']],self.leds['led'][self.leds['now']])
+        
+        
