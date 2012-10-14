@@ -15,7 +15,7 @@ GPIO.setmode(GPIO.BOARD)
 LBut = 26;
 RBut = 23;
 TBut = 24;
-GoBut = 21;
+GoBut = 22;
 
 BUTTONDOWN = False;
 
@@ -57,7 +57,7 @@ while True :
     tmp.updateDisplay();
     
     while True:
-        time.sleep(0.1)
+        time.sleep(0.2)
 #        x = getkey();
         
 #        if x == 'a' : 
