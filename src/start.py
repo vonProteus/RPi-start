@@ -17,7 +17,7 @@ RBut = 23;
 TBut = 24;
 GoBut = 21;
 
-
+BUTTONDOWN = False;
 
 
 GPIO.setup(LBut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -77,17 +77,17 @@ while True :
 #            tmp.go()
 #            break
 
-        if GPIO.input(LBut) : 
+        if GPIO.input(LBut) == BUTTONDOWN : 
             tmp.moveL()
             break
-        if GPIO.input(RBut) : 
+        if GPIO.input(RBut) == BUTTONDOWN: 
             tmp.moveR()
             break
-        if GPIO.input(TBut) : 
+        if GPIO.input(TBut) == BUTTONDOWN: 
             tmp.click()
             break
 
-        if GPIO.input(GoBut):
+        if GPIO.input(GoBut) == BUTTONDOWN:
             tmp.go()
             break
     
